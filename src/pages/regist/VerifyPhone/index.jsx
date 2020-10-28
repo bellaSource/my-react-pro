@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { NavBar, Icon, InputItem, Button, Modal } from "antd-mobile";
+import { NavBar, Icon, InputItem, Button, Modal, Toast } from "antd-mobile";
 import { createForm } from "rc-form";
 
 import "./index.css";
 import { reqVerifyPhone } from "@api/regist";
+import VerifyButton from "@comps/VerifyButton";
 
 class VerifyPhone extends Component {
   state = {
@@ -32,24 +33,27 @@ class VerifyPhone extends Component {
     let isDisabled = true;
     if (reg.test(value)) {
       isDisabled = false;
-      console.log(111111111)
+      console.log(111111111);
     }
-    this.setState({ isDisabled:true });
-    console.log(2222222)
+    this.setState({ isDisabled });
+    console.log(2222222);
     //callback必须调用，否则校验失败
     // callback(message) 校验失败
     // callback() 校验成功
     callback();
   };
-  //当点击下一步的回调
-  next = async () => {
+  //当点击下一步的回调，
+  verifyPhone = async () => {
     try {
+      //验证手机号是否注册过
       //获取单个表单项的值
-      const phone = this.props.form.getFieldProps("phone");
-      const result = await reqVerifyPhone(phone)
-      console.log("success", result);
+      const phone = this.props.form.getFieldValue("phone");
+      //向后台发送请求，验证电话号码是否已存在
+      await reqVerifyPhone(phone);
+      console.log("success");
     } catch (e) {
-      console.log("err", e);
+      //请求失败--手机号存在
+      Toast.fail(e, 3);
     }
   };
   render() {
@@ -68,7 +72,7 @@ class VerifyPhone extends Component {
           <InputItem
             {...getFieldProps("phone", {
               //表单校验规则
-              rules: [{ rles: [{ validator: this.validator }] }],
+              rules: [{ validator: this.validator }],
             })}
             clear
             placeholder="请输入手机号码"
@@ -79,14 +83,11 @@ class VerifyPhone extends Component {
             </div>
           </InputItem>
         </div>
-        <Button
-          onClick={this.next}
-          type="warning"
-          className="warning-btn"
+        <VerifyButton
           disabled={isDisabled}
-        >
-          下一步
-        </Button>
+          callback={this.verifyPhone}
+          btnText="下一步"
+        />
       </div>
     );
   }
