@@ -33,10 +33,8 @@ class VerifyPhone extends Component {
     let isDisabled = true;
     if (reg.test(value)) {
       isDisabled = false;
-      console.log(111111111);
     }
     this.setState({ isDisabled });
-    console.log(2222222);
     //callback必须调用，否则校验失败
     // callback(message) 校验失败
     // callback() 校验成功
@@ -50,7 +48,6 @@ class VerifyPhone extends Component {
       const phone = this.props.form.getFieldValue("phone");
       //向后台发送请求，验证电话号码是否已存在
       await reqVerifyPhone(phone);
-      console.log("success");
     } catch (e) {
       //请求失败--手机号存在
       Toast.fail(e, 3);
