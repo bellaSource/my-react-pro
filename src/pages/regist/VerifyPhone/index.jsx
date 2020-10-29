@@ -42,12 +42,14 @@ class VerifyPhone extends Component {
   };
   //当点击下一步的回调，
   verifyPhone = async () => {
+    console.log(111)
     try {
       //验证手机号是否注册过
       //获取单个表单项的值
       const phone = this.props.form.getFieldValue("phone");
       //向后台发送请求，验证电话号码是否已存在
       await reqVerifyPhone(phone);
+      console.log("success");
     } catch (e) {
       //请求失败--手机号存在
       Toast.fail(e, 3);

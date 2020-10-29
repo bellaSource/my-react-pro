@@ -40,6 +40,7 @@ export default class VerifyButton extends Component {
         <Button
           style={{ display: !disabled ? "block" : "none" }}
           type="warning"
+          id="TencentCaptcha"
           className="warning-btn"
           data-appid="2030765311"
           data-cbfn="verifyCallback"
