@@ -1,0 +1,45 @@
+.verify-code-msg {
+  margin: 30px auto;
+  display: block;
+  width: 90px;
+  height: 70px;
+}
+
+.verify-code-tip {
+  text-align: center;
+  color: #2e2d2d;
+}
+
+.verify-password-btn {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.verify-code-container .verify-code-btn-disabled {
+  background-color: #f7f7f7;
+  color: silver;
+  border: 0.01rem solid #f7f7f7;
+}
+
+.verify-code-question {
+  color: #999;
+  display: block;
+  padding-top: 30px;
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+.verify-code-question a {
+  color: #3b7adb;
+  padding-left: 10px;
+}
+
+span.verify-password-icon {
+  font-size: 22px;
+}
+
+.verify-password-text {
+  padding: 0 15px;
+  color: #ccc;
+  font-size: 14px;
+}
